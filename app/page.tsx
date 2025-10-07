@@ -1,95 +1,58 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main style={{
+      minHeight: "100vh",
+      display: "grid",
+      placeItems: "center",
+      padding: "40px",
+      background: "linear-gradient(135deg,#0f172a,#1e293b)",
+      color: "#e2e8f0",
+      fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif"
+    }}>
+      <section style={{
+        maxWidth: 900,
+        width: "100%",
+        background: "rgba(15,23,42,0.65)",
+        border: "1px solid rgba(226,232,240,0.08)",
+        borderRadius: 16,
+        padding: 32,
+        boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
+      }}>
+        <h1 style={{ fontSize: 36, margin: 0, letterSpacing: 0.3 }}>
+          Juan Manuel Albino
+        </h1>
+        <p style={{ margin: "8px 0 16px", opacity: 0.9 }}>
+          Full Stack Developer Jr · React/Next.js · TypeScript · Node.js · .NET 8 · SQL
+        </p>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        <p style={{ lineHeight: 1.6, marginBottom: 24 }}>
+          Desarrollador Web Full Stack Jr. Construyo APIs REST y CRUDs con auth, paginación, validaciones,
+          manejo de errores y documentación (Swagger/OpenAPI). Deploys en Vercel/Render.
+          
+        </p>
+
+        <div style={{ display: "grid", gap: 12 }}>
+          <a href="mailto:juanmanuelalbino01@gmail.com" style={linkStyle}>✉️ Email</a>
+          <a href="https://www.linkedin.com/in/juan-manuel-albino/" style={linkStyle}>🔗 LinkedIn</a>
+          <a href="https://github.com/juanma-alb" style={linkStyle}>💻 GitHub</a>
+
+          {/* Proyectos (iremos activando los links) */}
+          <a href="https://node-auth-api.onrender.com" style={linkStyle}>API Demo — Node Auth API (en preparación)</a>
+          <a href="https://tasks-api.onrender.com" style={linkStyle}>API Demo — Tasks API (en preparación)</a>
+          <a href="https://recomendador-peliculas-dotnet.onrender.com" style={linkStyle}>Demo — Recomendador .NET (en preparación)</a>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+    </main>
   );
 }
+
+const linkStyle: React.CSSProperties = {
+  display: "inline-block",
+  padding: "10px 14px",
+  background: "rgba(148,163,184,0.15)",
+  border: "1px solid rgba(148,163,184,0.25)",
+  borderRadius: 10,
+  color: "#e2e8f0",
+  textDecoration: "none",
+  width: "fit-content"
+};
