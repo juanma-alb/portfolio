@@ -1,44 +1,64 @@
 import { Hero } from "@/components/hero";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-
-const sections = [
-  { id: "proyectos", title: "Proyectos" },
-  { id: "experiencia", title: "Experiencia" },
-  { id: "skills", title: "Skills" },
-  { id: "about", title: "Sobre mí" },
-  { id: "contacto", title: "Contacto" },
-];
+import { ProjectsGrid } from "@/components/ProjectsGrid";
+import { Timeline } from "@/components/Timeline";
+import { SkillCategory } from "@/components/SkillCategory";
+import { projects } from "@/content/projects";
+import { experience } from "@/content/experience";
+import { skills as skillsData } from "@/content/skills";
+import { profile } from "@/content/profile";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Navbar />
-      <main id="main" className="flex-1">
+   <main id="main" className="flex-1 bg-background">
         <Hero />
-        <div className="bg-muted/20 py-16">
-          <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 sm:px-6">
-            {sections.map((section) => (
-              <section
-                key={section.id}
-                id={section.id}
-                aria-labelledby={`${section.id}-heading`}
-                className="scroll-mt-24 rounded-3xl border border-border/60 bg-background/80 p-8 shadow-sm backdrop-blur"
-              >
-                <div className="space-y-3">
-                  <h2 id={`${section.id}-heading`} className="text-2xl font-semibold tracking-tight">
-                    {section.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground">
-                    Contenido en construcción para la sección {section.title.toLowerCase()}.
-                  </p>
-                </div>
-              </section>
-            ))}
+
+        <section
+          id="proyectos"
+          aria-labelledby="proyectos-heading"
+          className="border-b border-border/60 py-16 sm:py-20"
+        >
+          <div className="mx-auto max-w-6xl space-y-6 px-4 sm:px-6">
+            <h2 id="proyectos-heading" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Proyectos
+            </h2>
+            <ProjectsGrid projects={projects} />
           </div>
-        </div>
+        </section>
+
+        <section
+          id="experiencia"
+          aria-labelledby="experiencia-heading"
+          className="border-b border-border/60 py-16 sm:py-20"
+        >
+          <div className="mx-auto max-w-6xl space-y-6 px-4 sm:px-6">
+            <h2 id="experiencia-heading" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Experiencia
+            </h2>
+            <Timeline items={experience} />
+          </div>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-heading" className="border-b border-border/60 py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6">
+            <h2 id="skills-heading" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Skills
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <SkillCategory title={skillsData.core.title} skills={skillsData.core.skills} />
+              <SkillCategory title={skillsData.tools.title} skills={skillsData.tools.skills} />
+              <SkillCategory title={skillsData.interests.title} skills={skillsData.interests.skills} />
+            </div>
+          </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-heading" className="py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl space-y-4 px-4 sm:px-6">
+            <h2 id="about-heading" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Sobre mí
+            </h2>
+            <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">{profile.about}</p>
+          </div>
+        </section>
       </main>
-      <Footer />
-    </div>
   );
 }
