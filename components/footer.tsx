@@ -1,16 +1,13 @@
-import type { ReactNode } from "react";
-
-import Link from "next/link";
+// components/footer.tsx
 import { Github, Linkedin, Mail, Twitter, Globe } from "lucide-react";
-
 import { profile } from "@/content/profile";
 
-const iconMap: Record<string, ReactNode> = {
+const iconMap = {
   github: <Github className="h-4 w-4" aria-hidden />,
   linkedin: <Linkedin className="h-4 w-4" aria-hidden />,
   twitter: <Twitter className="h-4 w-4" aria-hidden />,
   website: <Globe className="h-4 w-4" aria-hidden />,
-};
+} as const;
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -21,35 +18,45 @@ export function Footer() {
         <div className="space-y-2 text-sm text-muted-foreground">
           <p className="font-medium text-foreground">{profile.name}</p>
           <p>{profile.location}</p>
-          <Link
+
+          {/* Mail: enlace externo => <a> */}
+          <a
             href={`mailto:${profile.email}`}
             className="inline-flex items-center gap-2 text-foreground transition hover:text-primary"
           >
             <Mail className="h-4 w-4" aria-hidden />
             {profile.email}
-          </Link>
+          </a>
         </div>
+
         <div className="flex flex-col items-start gap-3 md:items-end">
           <nav aria-label="Redes sociales">
             <ul className="flex flex-wrap items-center gap-3">
               {profile.socials.map((social) => (
                 <li key={social.label}>
-                  <Link
+                  {/* Social: URL externa => <a> */}
+                  <a
                     href={social.url}
                     className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:border-primary hover:text-primary"
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    {iconMap[social.icon] ?? <Globe className="h-4 w-4" aria-hidden />}
+                    {iconMap[social.icon as keyof typeof iconMap] ?? (
+                      <Globe className="h-4 w-4" aria-hidden />
+                    )}
                     <span>{social.label}</span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
-          <p className="text-xs text-muted-foreground">© {year} Todos los derechos reservados.</p>
+
+          <p className="text-xs text-muted-foreground">
+            © {year} Todos los derechos reservados.
+          </p>
         </div>
       </div>
     </footer>
   );
 }
+
