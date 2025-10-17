@@ -11,7 +11,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const config = [
+export default [
   {
     ignores: [
       "node_modules/**",
@@ -44,5 +44,3 @@ const config = [
     },
   },
 ];
-
-export default config;

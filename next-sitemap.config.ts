@@ -12,7 +12,7 @@ const config: IConfig = {
   autoLastmod: true,
   alternateRefs: [],
   transform: async (cfg, path) => {
-    if (path === "/404" || path.startsWith("/api")) return undefined;
+    if (path === "/404" || path.startsWith("/api")) return null;
     return {
       loc: `${cfg.siteUrl}${path}`,
       changefreq: "weekly",
