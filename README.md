@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Next.js
 
-## Getting Started
+Este proyecto es una landing de portfolio construida con Next.js 15, React 18 y TypeScript. El objetivo es ofrecer una experiencia rápida, accesible y fácil de mantener para mostrar proyectos, experiencia profesional y medios de contacto.
 
-First, run the development server:
+## Scripts disponibles
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- `npm run dev`: inicia el servidor de desarrollo en `http://localhost:3000`.
+- `npm run build`: genera la versión optimizada para producción.
+- `npm run start`: ejecuta la aplicación en modo producción (requiere `npm run build` previo).
+- `npm run lint`: ejecuta ESLint sobre el código del proyecto.
+- `npm run typecheck`: corre la verificación estricta de tipos con TypeScript.
+- `npm run test`: ejecuta la suite de pruebas con Jest y Testing Library.
+- `npm run test:watch`: ejecuta las pruebas en modo observador.
+- `npm run format`: verifica el formato con Prettier.
+- `npm run format:write`: reescribe el código siguiendo las reglas de Prettier.
+- `npm run ci:check`: comando pensado para pipelines CI (lint + typecheck + test).
+- `npm run sitemap`: genera `sitemap.xml` y `robots.txt` utilizando `next-sitemap`.
+
+## Estructura inicial
+
+```
+.
+├── app/
+│   ├── fonts/
+│   ├── layout.tsx
+│   └── globals.css
+├── components/
+├── content/
+├── lib/
+├── public/
+├── tests/
+├── next.config.ts
+├── tailwind.config.ts
+├── tsconfig.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dependencias clave
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **UI y estilos:** Tailwind CSS, shadcn/ui, lucide-react, Framer Motion.
+- **Formularios y validación:** React Hook Form, Zod.
+- **Infraestructura:** next-themes, next-sitemap, Nodemailer/Resend (API contacto), @vercel/analytics.
+- **Calidad:** ESLint, Prettier, Jest, Testing Library.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Próximos pasos
 
-## Learn More
+1. Configurar componentes compartidos (Navbar, Hero, etc.).
+2. Implementar secciones de contenido (Projects, Experience, Skills, About, Contacto).
+3. Añadir integración del formulario de contacto con API mock/Resend.
+4. Completar SEO avanzado, Open Graph y schema.org.
+5. Escribir pruebas unitarias para Navbar, ProjectCard y ContactForm.
+6. Documentar guía de contenidos y checklist de deploy (se añadirá al final del proyecto).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Nota: Las imágenes del portfolio deben colocarse en `public/images` y `public/images/projects`. Si aún no contás con los assets definitivos, podés usar placeholders temporales.
