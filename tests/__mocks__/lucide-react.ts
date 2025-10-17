@@ -1,12 +1,16 @@
+import React from "react";
+
 export const createMockIcon = (name: string) =>
   function MockIcon() {
-    return <svg data-testid={`icon-${name}`} />;
+    return React.createElement("svg", {
+      "data-testid": `icon-${name}`,
+    });
   };
 
 export const icons = new Proxy(
   {},
   {
-    get: (_, prop: string) => createMockIcon(prop),
+    get: (_target, prop: string) => createMockIcon(String(prop)),
   },
 );
 

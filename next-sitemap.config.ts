@@ -12,6 +12,7 @@ const config: IConfig = {
   autoLastmod: true,
   alternateRefs: [],
   transform: async (cfg, path) => {
+    // En next-sitemap v5 se excluye retornando null
     if (path === "/404" || path.startsWith("/api")) return null;
     return {
       loc: `${cfg.siteUrl}${path}`,

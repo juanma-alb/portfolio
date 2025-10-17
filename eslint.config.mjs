@@ -22,6 +22,7 @@ export default [
       "coverage/**",
     ],
   },
+  // Config base de Next (flat) + TS
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
@@ -44,3 +45,4 @@ export default [
     },
   },
 ];
+
