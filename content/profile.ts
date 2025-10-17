@@ -69,22 +69,21 @@ export type Profile = {
 };
 
 export const profile: Profile = {
-  name: "Nombre Apellido",
-  role: "Front-end Engineer",
+  name: "Juan Manuel Albino",
+  role: "Desarrollador Full-Stack",
   shortBio:
     "Diseño y construyo experiencias web performantes con foco en DX, accesibilidad y negocios.",
   about:
     "Soy un desarrollador frontend con pasión por crear productos digitales que generen impacto medible. Me entusiasma colaborar con equipos multifuncionales, experimentar con nuevas tecnologías y mantener altos estándares de calidad.",
-  email: "contacto@example.com",
-  website: "https://portfolio.dev",
+  email: "juanmanuelalbino01@gmail.com",
+  website: "https://portfolio-juan-alb.vercel.app/",
   location: "Buenos Aires, Argentina",
   avatar: "/images/avatar.jpg",
   resumeUrl: "https://portfolio.dev/cv.pdf",
   currentCompany: "Startup Ejemplo",
   socials: [
-    { label: "GitHub", url: "https://github.com/usuario", icon: "github" },
+    { label: "GitHub", url: "https://github.com/juanma-alb", icon: "github" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/usuario", icon: "linkedin" },
-    { label: "X", url: "https://x.com/usuario", icon: "twitter" },
   ],
   skills: {
     core: ["React", "Next.js", "TypeScript", "Node.js", "Accessibility"],

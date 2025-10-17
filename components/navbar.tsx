@@ -55,7 +55,7 @@ export function Navbar() {
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
             NA
           </span>
-          <span>Nombre Apellido</span>
+          <span>Juan Manuel Albino</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Secciones principales">

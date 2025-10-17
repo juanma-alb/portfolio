@@ -1,3 +1,5 @@
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { Timeline } from "@/components/Timeline";
@@ -9,7 +11,9 @@ import { profile } from "@/content/profile";
 
 export default function Home() {
   return (
-   <main id="main" className="flex-1 bg-background">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Navbar />
+      <main id="main" className="flex-1 bg-background">
         <Hero />
 
         <section
@@ -59,6 +63,8 @@ export default function Home() {
             <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">{profile.about}</p>
           </div>
         </section>
-      </main>
-  );
+       </main>
+-      <Footer />
+-    </div>
+      );
 }

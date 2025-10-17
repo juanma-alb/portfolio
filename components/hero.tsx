@@ -62,7 +62,7 @@ export function Hero() {
               <Link href="#proyectos">Ver proyectos</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="#contacto">Contactar</Link>
+              <a href="mailto:juanmanuelalbino@gmail.com">Contactar</a>
             </Button>
           </div>
         </div>
