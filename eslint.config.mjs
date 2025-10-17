@@ -11,7 +11,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const config = [
+export default [
   {
     ignores: [
       "node_modules/**",
@@ -22,6 +22,7 @@ const config = [
       "coverage/**",
     ],
   },
+  // Config base de Next (flat) + TS
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
@@ -45,4 +46,3 @@ const config = [
   },
 ];
 
-export default config;

@@ -10,7 +10,7 @@ export const createMockIcon = (name: string) =>
 export const icons = new Proxy(
   {},
   {
-    get: (_target, prop: string) => createMockIcon(prop),
+    get: (_target, prop: string) => createMockIcon(String(prop)),
   },
 );
 
