@@ -9,21 +9,21 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#experiencia", label: "Experiencia" },
-  { href: "#skills", label: "Skills" },
-  { href: "#about", label: "Sobre mí" },
-  { href: "#contacto", label: "Contacto" },
+  { id: "proyectos", label: "Proyectos" },
+  { id: "experiencia", label: "Experiencia" },
+  { id: "skills", label: "Skills" },
+  { id: "about", label: "Sobre mí" },
+  { id: "contacto", label: "Contacto" },
 ];
 
 export function Navbar() {
   const [activeSection, setActiveSection] = React.useState<string>("hero");
 
   React.useEffect(() => {
-    const sectionIds = ["hero", ...navItems.map((item) => item.href.replace("#", ""))];
+    const sectionIds = ["hero", ...navItems.map((i) => i.id)];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
+      .filter((el): el is HTMLElement => Boolean(el));
 
     if (sections.length === 0) return;
 
@@ -41,18 +41,15 @@ export function Navbar() {
       },
     );
 
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    sections.forEach((s) => observer.observe(s));
+    return () => sections.forEach((s) => observer.unobserve(s));
   }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link
-          href="#hero"
+          href={{ pathname: "/", hash: "hero" }}
           className="flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground transition hover:text-primary"
         >
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -60,18 +57,19 @@ export function Navbar() {
           </span>
           <span>Nombre Apellido</span>
         </Link>
+
         <nav className="hidden items-center gap-1 md:flex" aria-label="Secciones principales">
           {navItems.map((item) => {
-            const isActive = activeSection === item.href.replace("#", "");
+            const isActive = activeSection === item.id;
             return (
               <Button
-                key={item.href}
+                key={item.id}
                 asChild
                 variant={isActive ? "default" : "ghost"}
                 className="px-4"
               >
                 <Link
-                  href={item.href}
+                  href={{ pathname: "/", hash: item.id }}
                   className="text-sm"
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -81,9 +79,10 @@ export function Navbar() {
             );
           })}
         </nav>
+
         <div className="flex items-center gap-3">
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <Link href="#contacto">Contactar</Link>
+            <Link href={{ pathname: "/", hash: "contacto" }}>Contactar</Link>
           </Button>
           <ThemeToggle />
           <MobileMenu activeSection={activeSection} />
@@ -103,20 +102,14 @@ function MobileMenu({ activeSection }: MobileMenuProps) {
   React.useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
+      if (event.key === "Escape") setIsOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -136,6 +129,7 @@ function MobileMenu({ activeSection }: MobileMenuProps) {
         <span className="sr-only">{isOpen ? "Cerrar menú" : "Abrir menú"}</span>
         {isOpen ? <X aria-hidden className="h-5 w-5" /> : <Menu aria-hidden className="h-5 w-5" />}
       </Button>
+
       <AnimatePresence>
         {isOpen ? (
           <motion.div
@@ -169,13 +163,14 @@ function MobileMenu({ activeSection }: MobileMenuProps) {
                   <X aria-hidden className="h-5 w-5" />
                 </Button>
               </div>
+
               <ul className="flex flex-col gap-3">
                 {navItems.map((item) => {
-                  const isActive = activeSection === item.href.replace("#", "");
+                  const isActive = activeSection === item.id;
                   return (
-                    <li key={item.href}>
+                    <li key={item.id}>
                       <Link
-                        href={item.href}
+                        href={{ pathname: "/", hash: item.id }}
                         className="block rounded-full px-4 py-2 text-sm font-medium transition hover:bg-accent hover:text-accent-foreground"
                         aria-current={isActive ? "page" : undefined}
                         onClick={() => setIsOpen(false)}
@@ -186,8 +181,9 @@ function MobileMenu({ activeSection }: MobileMenuProps) {
                   );
                 })}
               </ul>
+
               <Button asChild size="lg" className="mt-auto">
-                <Link href="#contacto" onClick={() => setIsOpen(false)}>
+                <Link href={{ pathname: "/", hash: "contacto" }} onClick={() => setIsOpen(false)}>
                   Contactar
                 </Link>
               </Button>
