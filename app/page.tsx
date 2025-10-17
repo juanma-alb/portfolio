@@ -1,6 +1,4 @@
 import { Hero } from "@/components/hero";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { Timeline } from "@/components/Timeline";
 import { SkillCategory } from "@/components/SkillCategory";
@@ -11,9 +9,7 @@ import { profile } from "@/content/profile";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Navbar />
-      <main id="main" className="flex-1 bg-background">
+   <main id="main" className="flex-1 bg-background">
         <Hero />
 
         <section
@@ -64,7 +60,5 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer />
-    </div>
   );
 }
