@@ -1,75 +1,44 @@
+import { Hero } from "@/components/hero";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+
+const sections = [
+  { id: "proyectos", title: "Proyectos" },
+  { id: "experiencia", title: "Experiencia" },
+  { id: "skills", title: "Skills" },
+  { id: "about", title: "Sobre mí" },
+  { id: "contacto", title: "Contacto" },
+];
+
 export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "grid",
-        placeItems: "center",
-        padding: "40px",
-        background: "linear-gradient(135deg,#0f172a,#1e293b)",
-        color: "#e2e8f0",
-        fontFamily:
-          "system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif",
-      }}
-    >
-      <section
-        style={{
-          maxWidth: 900,
-          width: "100%",
-          background: "rgba(15,23,42,0.65)",
-          border: "1px solid rgba(226,232,240,0.08)",
-          borderRadius: 16,
-          padding: 32,
-          boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-        }}
-      >
-        <h1 style={{ fontSize: 36, margin: 0, letterSpacing: 0.3 }}>
-          Juan Manuel Albino
-        </h1>
-        <p style={{ margin: "8px 0 16px", opacity: 0.9 }}>
-          Full Stack Developer Jr · React/Next.js · TypeScript · Node.js · .NET 8 · SQL
-        </p>
-
-        <p style={{ lineHeight: 1.6, marginBottom: 24 }}>
-          Desarrollador Web Full Stack Jr. Construyo APIs REST y CRUDs con auth,
-          paginación, validaciones, manejo de errores y documentación (Swagger/OpenAPI).
-          Deploys en Vercel/Render.
-        </p>
-
-        <div style={{ display: "grid", gap: 12 }}>
-          <a href="mailto:juanmanuelalbino01@gmail.com" style={linkStyle}>
-            ✉️ Email
-          </a>
-          <a href="https://www.linkedin.com/in/juan-manuel-albino/" style={linkStyle}>
-            🔗 LinkedIn
-          </a>
-          <a href="https://github.com/juanma-alb" style={linkStyle}>
-            💻 GitHub
-          </a>
-
-          {/* Proyectos (iremos activando los links) */}
-          <a href="https://node-auth-api.onrender.com" style={linkStyle}>
-            API Demo — Node Auth API (en preparación)
-          </a>
-          <a href="https://tasks-api.onrender.com" style={linkStyle}>
-            API Demo — Tasks API (en preparación)
-          </a>
-          <a href="https://recomendador-peliculas-dotnet.onrender.com" style={linkStyle}>
-            Demo — Recomendador .NET (en preparación)
-          </a>
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Navbar />
+      <main id="main" className="flex-1">
+        <Hero />
+        <div className="bg-muted/20 py-16">
+          <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 sm:px-6">
+            {sections.map((section) => (
+              <section
+                key={section.id}
+                id={section.id}
+                aria-labelledby={`${section.id}-heading`}
+                className="scroll-mt-24 rounded-3xl border border-border/60 bg-background/80 p-8 shadow-sm backdrop-blur"
+              >
+                <div className="space-y-3">
+                  <h2 id={`${section.id}-heading`} className="text-2xl font-semibold tracking-tight">
+                    {section.title}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    Contenido en construcción para la sección {section.title.toLowerCase()}.
+                  </p>
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
-      </section>
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 }
-
-const linkStyle: React.CSSProperties = {
-  display: "inline-block",
-  padding: "10px 14px",
-  background: "rgba(148,163,184,0.15)",
-  border: "1px solid rgba(148,163,184,0.25)",
-  borderRadius: 10,
-  color: "#e2e8f0",
-  textDecoration: "none",
-  width: "fit-content",
-};
