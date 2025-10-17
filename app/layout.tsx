@@ -5,6 +5,8 @@ import { AnalyticsWrapper } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { profile } from "@/content/profile";
 import "./globals.css";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 const siteUrlEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const siteUrl = siteUrlEnv && siteUrlEnv.length > 0 ? siteUrlEnv : "https://portfolio.dev";
@@ -87,8 +89,16 @@ export default function RootLayout({
         <a href="#main" className="sr-only focus:not-sr-only">
           Saltar al contenido
         </a>
-        <ThemeProvider storageKey="portfolio-theme">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          storageKey="portfolio-theme"
+        >
+          <Navbar />
           {children}
+          <Footer />
           <AnalyticsWrapper />
         </ThemeProvider>
       </body>

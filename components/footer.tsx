@@ -1,11 +1,10 @@
 // components/footer.tsx
-import { Github, Linkedin, Mail, Twitter, Globe } from "lucide-react";
+import { Github, Linkedin, Mail, Globe } from "lucide-react";
 import { profile } from "@/content/profile";
 
 const iconMap = {
   github: <Github className="h-4 w-4" aria-hidden />,
   linkedin: <Linkedin className="h-4 w-4" aria-hidden />,
-  twitter: <Twitter className="h-4 w-4" aria-hidden />,
   website: <Globe className="h-4 w-4" aria-hidden />,
 } as const;
 
