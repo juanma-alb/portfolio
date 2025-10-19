@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { fontMono, fontSans } from "@/app/fonts/geist";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AnalyticsWrapper } from "@/lib/analytics";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"; 
 import { cn } from "@/lib/utils";
 import { profile } from "@/content/profile";
 import "./globals.css";
@@ -59,8 +60,8 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
-   twitter: {
+
+  twitter: {
     card: "summary_large_image",
     title: "Portfolio de Juan Manuel Albino",
     description:
@@ -98,7 +99,6 @@ export default function RootLayout({
         <a href="#main" className="sr-only focus:not-sr-only">
           Saltar al contenido
         </a>
-         {/* JSON-LD (SEO): Person + Projects */}
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -115,7 +115,8 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
-          <AnalyticsWrapper />
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

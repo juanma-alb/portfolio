@@ -4,7 +4,8 @@ import * as React from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { useSectionObserver } from "@/hooks/useSectionObserver";
@@ -34,35 +35,35 @@ export function Navbar() {
     () =>
       prefersReduced
         ? {
-            closed: { opacity: 0, pointerEvents: "none" as const },
-            open: { opacity: 1, pointerEvents: "auto" as const },
-          }
+          closed: { opacity: 0, pointerEvents: "none" as const },
+          open: { opacity: 1, pointerEvents: "auto" as const },
+        }
         : {
-            closed: {
-              opacity: 0,
-              y: -12,
-              scale: 0.98,
-              filter: "blur(3px)",
-              pointerEvents: "none" as const,
-              transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] },
-            },
-            open: {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)",
-              pointerEvents: "auto" as const,
-              transition: {
-                type: "spring",
-                stiffness: 420,
-                damping: 36,
-                mass: 0.6,
-                bounce: 0.12,
-                when: "beforeChildren",
-                staggerChildren: 0.035,
-              },
+          closed: {
+            opacity: 0,
+            y: -12,
+            scale: 0.98,
+            filter: "blur(3px)",
+            pointerEvents: "none" as const,
+            transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] },
+          },
+          open: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            pointerEvents: "auto" as const,
+            transition: {
+              type: "spring",
+              stiffness: 420,
+              damping: 36,
+              mass: 0.6,
+              bounce: 0.12,
+              when: "beforeChildren",
+              staggerChildren: 0.035,
             },
           },
+        },
     [prefersReduced]
   );
 
@@ -71,17 +72,17 @@ export function Navbar() {
     () =>
       prefersReduced
         ? {
-            closed: { opacity: 0 },
-            open: { opacity: 1 },
-          }
+          closed: { opacity: 0 },
+          open: { opacity: 1 },
+        }
         : {
-            closed: { opacity: 0, y: -8 },
-            open: {
-              opacity: 1,
-              y: 0,
-              transition: { type: "spring", stiffness: 500, damping: 32 },
-            },
+          closed: { opacity: 0, y: -8 },
+          open: {
+            opacity: 1,
+            y: 0,
+            transition: { type: "spring", stiffness: 500, damping: 32 },
           },
+        },
     [prefersReduced]
   );
 
@@ -160,44 +161,46 @@ export function Navbar() {
               {isOpen ? <X aria-hidden className="h-5 w-5" /> : <Menu aria-hidden className="h-5 w-5" />}
             </Button>
 
-            <motion.div
-              id="mobile-menu"
-              role="dialog"
-              aria-modal="true"
-              initial={false}
-              animate={isOpen ? "open" : "closed"}
-              variants={menuVariants}
-              className="fixed inset-x-0 top-14 z-40 mx-2 md:hidden rounded-2xl border bg-background/95 backdrop-blur shadow-lg"
-            >
-              <motion.ul className="flex flex-col gap-2 p-4">
-                {sectionIds.map((id, idx) => {
-                  const label =
-                    id === "sobre-mi"
-                      ? "Sobre mí"
-                      : id.charAt(0).toUpperCase() + id.slice(1);
-                  const isActive = activeSection === id;
-                  return (
-                    <motion.li key={id} variants={itemVariants}>
-                      <Link
-                        ref={idx === 0 ? firstLinkRef : undefined}
-                        href={`/#${id}`}
-                        aria-current={isActive ? "page" : undefined}
-                        className={`block rounded-xl px-4 py-2 transition ${
-                          isActive ? "bg-primary/10" : "hover:bg-muted"
-                        }`}
-                        onClick={() => {
-                          setIsOpen(false);
-                          queueMicrotask(() => openBtnRef.current?.focus());
-                        }}
-                      >
-                        {label}
-                      </Link>
-                    </motion.li>
-                  );
-                })}
-              </motion.ul>
-            </motion.div>
-          </div>
+            {isOpen && (
+              <motion.div
+                id="mobile-menu"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Menú de navegación"
+                initial="closed"
+                animate="open"
+                variants={menuVariants}
+                className="fixed inset-x-0 top-14 z-40 mx-2 rounded-2xl border bg-background/95 shadow-lg backdrop-blur md:hidden"
+              >
+                <motion.ul className="flex flex-col gap-2 p-4">
+                  {sectionIds.map((id, idx) => {
+                    const label =
+                      id === "sobre-mi"
+                        ? "Sobre mí"
+                        : id.charAt(0).toUpperCase() + id.slice(1);
+                    const isActive = activeSection === id;
+                    return (
+                      <motion.li key={id} variants={itemVariants}>
+                        <Link
+                          ref={idx === 0 ? firstLinkRef : undefined}
+                          href={`/#${id}`}
+                          aria-current={isActive ? "page" : undefined}
+                          className={`block rounded-xl px-4 py-2 transition ${isActive ? "bg-primary/10" : "hover:bg-muted"
+                            }`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            queueMicrotask(() => openBtnRef.current?.focus());
+                          }}
+                        >
+                          {label}
+                        </Link>
+                      </motion.li>
+                    );
+                  })}
+                </motion.ul>
+              </motion.div>
+
+            )}</div>
         </div>
       </div>
     </header>
