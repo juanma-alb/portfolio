@@ -79,7 +79,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <a
                 href={links.github}
                 target="_blank"
-                rel="noreferrer noopener"
+                rel="noopener noreferrer"
                 aria-label={`Abrir GitHub de ${title}`}
                 className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
               >
@@ -90,7 +90,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <a
                 href={links.demo}
                 target="_blank"
-                rel="noreferrer noopener"
+                rel="noopener noreferrer"
                 aria-label={`Ver demo de ${title}`}
                 className={cn(buttonVariants({ size: "sm" }), "rounded-full")}
               >

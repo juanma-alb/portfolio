@@ -11,13 +11,14 @@ const config: IConfig = {
   priority: 0.7,
   autoLastmod: true,
   alternateRefs: [],
-  transform: (cfg, path) => {
-    if (path === "/404" || path.startsWith("/api")) return undefined;
+ 
+ transform: (cfg, url) => {
 
+  if (url === "/404" || url.startsWith("/api")) return;
     return {
-      loc: `${cfg.siteUrl}${path}`,
+      loc: `${cfg.siteUrl}${url}`,
       changefreq: "weekly",
-      priority: path === "/" ? 1 : 0.7,
+      riority: url === "/" ? 1 : 0.7,
       lastmod: new Date().toISOString(),
     };
   },

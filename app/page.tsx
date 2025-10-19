@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { ContactForm } from "@/components/ContactForm";

@@ -16,7 +16,8 @@
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "ci:check": "npm run lint && npm run typecheck && npm run test",
-    "sitemap": "next-sitemap"
+    "sitemap": "next-sitemap",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
