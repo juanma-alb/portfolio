@@ -74,7 +74,7 @@ export function ContactForm() {
           aria-describedby={errors.name ? "name-error" : undefined}
         />
         {errors.name ? (
-          <p id="name-error" className="text-sm text-destructive">
+          <p id="name-error" role="alert" className="text-sm text-destructive">
             {errors.name.message}
           </p>
         ) : null}
@@ -95,7 +95,7 @@ export function ContactForm() {
           aria-describedby={errors.email ? "email-error" : undefined}
         />
         {errors.email ? (
-          <p id="email-error" className="text-sm text-destructive">
+          <p id="email-error" role="alert" className="text-sm text-destructive">
             {errors.email.message}
           </p>
         ) : null}
@@ -115,14 +115,14 @@ export function ContactForm() {
           aria-describedby={errors.message ? "message-error" : undefined}
         />
         {errors.message ? (
-          <p id="message-error" className="text-sm text-destructive">
+          <p id="message-error" role="alert" className="text-sm text-destructive">
             {errors.message.message}
           </p>
         ) : null}
       </div>
 
       <div className="pt-2">
-        <Button type="submit" disabled={isSubmitting} className="rounded-full">
+        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting ? "true" : "false"} className="rounded-full">
           {isSubmitting ? "Enviando…" : "Enviar"}
         </Button>
       </div>

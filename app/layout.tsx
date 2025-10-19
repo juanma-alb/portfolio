@@ -9,17 +9,16 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { personSchema, projectSchema } from "@/lib/schema";
 import { projects } from "@/content/projects";
-const siteUrlEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-const siteUrl = siteUrlEnv && siteUrlEnv.length > 0 ? siteUrlEnv : "https://portfolio.dev";
+const siteUrlEnv = process.env.NEXT_PUBLIC_SITE_URL;
+const siteUrl =
+  siteUrlEnv && siteUrlEnv.length > 0
+    ? siteUrlEnv
+    : "https://portfolio-juan-alb.vercel.app";
 const title = `Portfolio de ${profile.name}`;
 const description =
   "Portfolio personal moderno con proyectos, experiencia y un enfoque en rendimiento y accesibilidad.";
 
-const twitterHandle = profile.socials
-  .find((social) => social.label.toLowerCase() === "x")?.url
-  ?.split("/")
-  .filter(Boolean)
-  .pop();
+const twitterHandleEnv = process.env.NEXT_PUBLIC_TWITTER?.replace(/^@/, "") || undefined;
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -46,27 +45,29 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    title,
-    description,
-    siteName: title,
+    title: "Portfolio de Juan Manuel Albino",
+    description:
+      "Portfolio personal moderno con proyectos, experiencia y un enfoque en rendimiento y accesibilidad.",
+    siteName: "Juan Albino — Portfolio",
     locale: "es_ES",
     images: [
       {
-        url: `${siteUrl}/api/og`,
+        url: `${siteUrl}/opengraph-image?v=20251019`,
         width: 1200,
         height: 630,
-        alt: title,
+        alt: "Portfolio de Juan Manuel Albino",
       },
     ],
   },
   
    twitter: {
     card: "summary_large_image",
-    title,
-    description,
-    creator: twitterHandle ? `@${twitterHandle}` : undefined,
-    site: twitterHandle ? `@${twitterHandle}` : undefined,
-    images: [`${siteUrl}/api/og`],
+    title: "Portfolio de Juan Manuel Albino",
+    description:
+      "Portfolio personal moderno con proyectos, experiencia y un enfoque en rendimiento y accesibilidad.",
+    images: [`${siteUrl}/opengraph-image?v=20251019`],
+    creator: twitterHandleEnv ? `@${twitterHandleEnv}` : undefined,
+    site: twitterHandleEnv ? `@${twitterHandleEnv}` : undefined,
   },
 
   robots: {
@@ -81,7 +82,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const jsonLd = [
-    personSchema(profile, siteUrl),
+    personSchema(siteUrl),
     ...projects.map((p) => projectSchema(p, siteUrl)),
   ];
 

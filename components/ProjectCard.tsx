@@ -25,19 +25,19 @@ export function ProjectCard({ project }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm backdrop-blur"
+      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm backdrop-blur focus-within:ring"
     >
       {canRenderImage ? (
         <figure className="relative aspect-[3/2] overflow-hidden border-b border-border/60 bg-muted/40">
           <Image
             src={image.src}
-            alt={image.alt}
+            alt={image.alt ?? `Vista de ${title}`}
             fill
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
             priority={Boolean(project.featured)}
           />
-          <figcaption className="sr-only">{image.alt}</figcaption>
+          <figcaption className="sr-only">{image.alt ?? `Vista de ${title}`}</figcaption>
         </figure>
       ) : (
         <div
@@ -80,7 +80,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Abrir GitHub de ${title}`}
+                aria-label={`Abrir repositorio de ${title} en GitHub (se abre en una nueva pestaña)`}
                 className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
               >
                 Código
@@ -91,7 +91,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Ver demo de ${title}`}
+                aria-label={`Abrir demo de ${title} (se abre en una nueva pestaña)`}
                 className={cn(buttonVariants({ size: "sm" }), "rounded-full")}
               >
                 Demo

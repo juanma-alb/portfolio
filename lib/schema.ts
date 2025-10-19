@@ -1,19 +1,14 @@
-
-import type { Profile } from "@/content/profile";
 import type { Project } from "@/content/projects";
 
 
-export function personSchema(profile: Profile, siteUrl: string) {
-  const sameAs = profile.socials?.map((s) => s.url).filter(Boolean) ?? [];
+export function personSchema(siteUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: profile.name,
-    jobTitle: profile.role,
+    name: "Juan Manuel Albino",
     url: siteUrl,
-    image: `${siteUrl}/api/og`,
-    email: profile.email ? `mailto:${profile.email}` : undefined,
-    sameAs,
+    image: `${siteUrl}/opengraph-image`,
+    jobTitle: "Full-Stack Developer Jr",
   };
 }
 

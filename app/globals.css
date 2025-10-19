@@ -51,7 +51,7 @@
   --secondary-foreground: 210 20% 98%;
 
   --muted: 215 27.9% 16.9%;
-  --muted-foreground: 217.9 10.6% 64.9%;
+  --muted-foreground: 217.9 10.6% 60%;
 
   --accent: 215 27.9% 16.9%;
   --accent-foreground: 210 20% 98%;
@@ -88,4 +88,23 @@ body {
 .focus-visible\:outline-ring:focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
+}
+
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Sombra y borde suaves para overlays/menus */
+.shadow-lg {
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

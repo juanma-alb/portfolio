@@ -2,8 +2,14 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { ContactForm } from "@/components/ContactForm";
 
 describe("ContactForm", () => {
+  type FetchMock = jest.MockedFunction<typeof fetch>;
+  let fetchMock: FetchMock;
+
   beforeEach(() => {
-    (global as any).fetch = jest.fn();
+    // Creamos un mock tipado y lo asignamos a global.fetch
+    fetchMock = jest.fn() as unknown as FetchMock;
+  // Asignación tipada de fetch al objeto global para los tests
+  (global as unknown as { fetch: typeof fetch }).fetch = fetchMock;
   });
 
   afterEach(() => {
@@ -22,10 +28,11 @@ describe("ContactForm", () => {
   });
 
   it("envía con éxito y muestra mensaje de confirmación", async () => {
-    (global as any).fetch = jest.fn().mockResolvedValue({
+    const okResponse = {
       ok: true,
       json: async () => ({ ok: true, mocked: true }),
-    });
+    } satisfies Pick<Response, "ok" | "json">;
+    fetchMock.mockResolvedValue(okResponse as unknown as Response);
 
     render(<ContactForm />);
 
@@ -42,7 +49,7 @@ describe("ContactForm", () => {
       expect(screen.getByText(/¡mensaje enviado!/i)).toBeInTheDocument(),
     );
 
-    expect((global as any).fetch).toHaveBeenCalledWith("/api/contact", {
+    expect(fetchMock).toHaveBeenCalledWith("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -54,10 +61,11 @@ describe("ContactForm", () => {
   });
 
   it("muestra error si la API devuelve status no-ok", async () => {
-    (global as any).fetch = jest.fn().mockResolvedValue({
+    const failResponse = {
       ok: false,
       json: async () => ({ error: "Falla controlada" }),
-    });
+    } satisfies Pick<Response, "ok" | "json">;
+    fetchMock.mockResolvedValue(failResponse as unknown as Response);
 
     render(<ContactForm />);
 

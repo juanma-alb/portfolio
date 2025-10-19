@@ -22,8 +22,8 @@ const config = [
       "coverage/**",
     ],
   },
-  // Config base de Next (flat) + TS
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // Config base de Next (flat) + TS + jsx-a11y recommended (via FlatCompat)
+  ...compat.extends("next/core-web-vitals", "next/typescript", "plugin:jsx-a11y/recommended"),
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
     plugins: {
@@ -39,6 +39,10 @@ const config = [
     },
     rules: {
       "jsx-a11y/no-autofocus": ["error", { ignoreNonDOM: true }],
+      "jsx-a11y/anchor-is-valid": "error",
+      "jsx-a11y/alt-text": "error",
+      "jsx-a11y/aria-role": "warn",
+      "jsx-a11y/control-has-associated-label": "warn",
       "tailwindcss/classnames-order": "warn",
       "tailwindcss/no-custom-classname": "off",
       "tailwindcss/no-contradicting-classname": "error",
